@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'autocomplete_crm_tasks',
     'move_tasks_deadline_js',
     'task_ag_grid',
+    'my_update_task',
 ]
 
 MIDDLEWARE = [

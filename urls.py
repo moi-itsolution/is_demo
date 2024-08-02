@@ -48,6 +48,7 @@ urlpatterns = [
     path('autocomplete_crm_tasks/', include('autocomplete_crm_tasks.urls')),
     path('move_tasks_deadline_js/', include('move_tasks_deadline_js.urls', 'move_tasks_deadline_js')),
     path('task_aggrid/', include('task_ag_grid.urls')),
+    path('my_update_task/', include('my_update_task.urls')),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
