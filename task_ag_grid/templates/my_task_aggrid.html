@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .button {
+            width: 4cm;
+            height: 1cm;
+            background-color: #39cbdc;
+        }
+    </style>
+</head>
+<body>
+<h1>Включение виджета по переносу срока задачи</h1>
+<button class="button" onclick="document.location='{% url 'my_task_aggrid_install'%}'">Установить</button><br>
+<button class="button" onclick="document.location='{% url 'my_task_aggrid_delete'%}'">Удалить</button>
+</body>
+</html>

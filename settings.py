@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     'tg_openai_bot',
     'deal_for_powerbi',
     'autocomplete_crm_tasks',
-    'move_tasks_deadline_js'
+    'move_tasks_deadline_js',
+    'task_ag_grid',
 ]
 
 MIDDLEWARE = [
@@ -87,7 +88,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'wsgi.application'
 
 
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'is_demo',
@@ -95,8 +96,25 @@ DATABASES = {
         'PASSWORD': 'password',
         'HOST': 'localhost',
     },
-}
+}'''
 
+'''DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'foodgram',
+        'USER': 'postgresql',
+        'PASSWORD': '123456',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    },
+}'''
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR + '/' + 'db.sqlite3',
+    },
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
