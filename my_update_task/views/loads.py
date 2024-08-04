@@ -3,7 +3,6 @@ from django.shortcuts import render
 from settings import DOMAIN
 
 from integration_utils.bitrix24.bitrix_user_auth.main_auth import main_auth
-#from integration_utils.its_utils.app_get_params import get_params_from_sources
 
 APP_PATH = 'my_update_task'
 SIDEBAR_PATH = 'sidebar/'

@@ -7,8 +7,6 @@ def get_form(users, task_info):
 
     form_users = tuple([(user['ID'], f'{user["LAST_NAME"]} {user["NAME"]}') for user in users])
 
-    print(task_info['deadline'], task_info['endDatePlan'])
-
     class TaskForm(forms.Form):
         responsible = forms.ChoiceField(choices=form_users, label='Исполнитель')
         accomplices = forms.MultipleChoiceField(choices=form_users, label='Соисполнители')
@@ -35,7 +33,6 @@ def change_task(post, but):
     # Изменение задачи
 
     post = dict(post)
-    print(post)
     responsible = post.get('responsible')[0]
     accomplices = post.get('accomplices')
     deadline = post.get('deadline')[0]

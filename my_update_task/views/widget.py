@@ -7,7 +7,6 @@ import json
 from .utils import get_form, change_task
 
 
-
 @main_auth(on_cookies=True)
 def main_view(request):
     # Позволяет редактировать задачу
