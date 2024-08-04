@@ -3,8 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Редактирование задачи</title>
+    <style>
+        .task_change {
+            width: 50%;
+            padding: 15px;
+            background: #06fb375a;
+            border-radius: 10px;
+            margin: auto;
+        }
+    </style>
 </head>
 <body>
-
+<div class="task_change">
+<h1>Изменение параметров задачи</h1>
+{% if done %}
+<h2>{{ info }}</h2>
+{% else %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Редактирование">
+</form>
+{% endif %}
+</div>
 </body>
 </html>

@@ -4,13 +4,23 @@ from integration_utils.bitrix24.bitrix_user_auth.main_auth import main_auth
 
 import json
 
+from .utils import get_form, change_task
+
+
 
 @main_auth(on_cookies=True)
 def main_view(request):
     # Позволяет редактировать задачу
 
     but = request.bitrix_user_token
-    user_id = str(request.bitrix_user.bitrix_id)
+
+    if 'accomplices' in request.POST:
+        result = change_task(request.POST, but)
+
+        context = {'done': True, 'info': result}
+        return render(request, 'redactor.html', context)
+
+    # user_id = str(request.bitrix_user.bitrix_id)
     task_id = request.POST.get('PLACEMENT_OPTIONS')
     task_id = json.loads(task_id).get('TASK_ID')
 
@@ -23,11 +33,8 @@ def main_view(request):
 
     # получаем список юзеров
     users = but.call_list_method('user.get')
-    print(users)
+    form = get_form(users, task_info)
 
-    '''RESPONSIBLE_ID - Исполнитель
-    ACCOMPLICES - Соисполнители
-    DEADLINE - Крайний срок
-    END_DATE_PLAN - Плановое завершение'''
+    context = {'form': form, 'done': False, 'info': ''}
 
-    return HttpResponse(f'Hello update task {user_id}')
+    return render(request, 'redactor.html', context)
