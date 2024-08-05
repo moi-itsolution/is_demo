@@ -10,6 +10,39 @@
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
-{{ ag_script|safe }}
+<script>
+
+
+    const my_task_grid = {
+        rowData: {{ render_tasks|safe }},
+        defaultColDef: {
+                        floatingFilter: true,
+                        resizable: true,
+                        sortable: true,
+                        filter: true},
+
+        columnDefs: [
+            {"field": "id", "headerName": "ID", "rowGroup": false, "resizable": true, "autoHeight": true},
+            {"field": "title",
+                "headerName": "Наименование",
+                "rowGroup": false,
+                "resizable": true,
+                "autoHeight": true,
+                "cellRenderer": function (params) {
+                    let domain = params.data['domain'];
+                    let user_id = params.data['user_id'];
+                    let task_id = params.data['id'];
+                    let link = `https://${domain}/company/personal/user/${user_id}/tasks/task/view/${task_id}/`
+                    return `<a href="${link}" target="_blank">${params.data['title']}</a>`
+                }
+            },
+            {"field": "status", "headerName": "Статус", "rowGroup": false, "resizable": true, "autoHeight": true},
+            {"field": "priority", "headerName": "Приоритет", "rowGroup": false, "resizable": true, "autoHeight": true},
+            {"field": "deadline", "headerName": "Дедлайн", "rowGroup": false, "resizable": true, "autoHeight": true}]};
+
+    const eDiv = document.querySelector("#{{ div_id }}");
+    const gridApi = agGrid.createGrid(eDiv, my_task_grid);
+
+</script>
 
 </html>
