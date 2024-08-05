@@ -7,3 +7,5 @@ local_settings.py
 venv/
 .media/
 db.sqlite3
+node_modules/
+vue_is_demo/node_modules
