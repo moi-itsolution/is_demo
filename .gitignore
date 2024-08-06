@@ -9,3 +9,5 @@ venv/
 db.sqlite3
 node_modules/
 vue_is_demo/node_modules
+temp_files/
+temp_files

@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'move_tasks_deadline_js',
     'task_ag_grid',
     'my_update_task',
+    'google_rw',
 ]
 
 MIDDLEWARE = [

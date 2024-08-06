@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>google sheets</title>
+</head>
+<body>
+<button onclick="document.location='{% url 'reload_start'%}'">Назад</button>
+<h1>Работа с Google таблицами</h1>
+{% if done %}
+    <h3>{{ info }}</h3>
+{% else %}
+{% if work %}
+<form method="post" enctype="multipart/form-data">
+    {{ form.as_p }}
+    <input type="submit" value="Загрузить">
+</form>
+{% else %}
+
+<form method="post">
+    {{ form.as_p }}
+    <input type="submit" value="Выбрать">
+</form>
+{% endif %}
+
+{% endif %}
+
+</body>
+</html>
