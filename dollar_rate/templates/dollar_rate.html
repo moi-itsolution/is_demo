@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dollar_rate</title>
+<style>
+    .cont {
+        margin: 0 auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .head {
+        padding: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+</style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        let data;
+        let chart;
+        let table;
+
+        google.charts.load('current', {'packages':['corechart', 'table']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+        // Create our data table.
+        data = new google.visualization.DataTable();
+        data.addColumn('string', 'Дата');
+        data.addColumn('number', 'Стоимость');
+        data.addRows([
+            {% for k, v in values %}
+            ['{{ k }}', {{ v|safe }}],{%  endfor %}
+        ]);
+        let options = {'title':'Курс доллар / рубль',
+                       'hAxis': {'title': 'Дата'},
+                       'vAxis': {'title': 'Стоимость'},
+                       'width':700,
+                       'height':300};
+
+        let table_option = {
+            title: 'Курс доллар / рубль',
+            showRowNumber: true
+        };
+
+        // Instantiate and draw our chart, passing in some options.
+        chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        table = new google.visualization.Table(document.getElementById('table_div'));
+
+        chart.draw(data, options);
+        table.draw(data, table_option);
+      }
+
+    </script>
+</head>
+<body>
+<div class="head">
+    <h1 style="margin: 0 auto">Курс доллара в последнее время</h1>
+    <button onclick="document.location='{% url 'reload_start'%}'">Назад</button>
+</div>
+
+<div class="cont">
+    <div id="chart_div" style="width:700; height:300; margin-left: 30px"></div>
+    <div id="table_div" style="width:400; height:300; margin-left: 30px"></div>
+</div>
+
+</body>
+</html>

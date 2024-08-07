@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'task_ag_grid',
     'my_update_task',
     'google_rw',
+    'dollar_rate',
 ]
 
 MIDDLEWARE = [
