@@ -38,11 +38,13 @@ def my_gtable_work(request):
         var = request.POST.get('action')
         if var == 'import':
             # Скачиваем данные из таблицы
-            info = import_values(request.POST.get('url'))
+            response = import_values(request.POST.get('url'))
+
+            return response
         elif var == 'export':
             # Загружаем данные в таблицу
             form = get_form('export')(request.POST, request.FILES)
-            info = 'form to load'
+            info = 'Empty result'
 
             if form.is_valid():
                 data = form.cleaned_data
@@ -53,11 +55,13 @@ def my_gtable_work(request):
 
                 info = export_values(data['url'], json_file)
 
-
         else:
             info = 'Не удалось выполнить указанное действие'
+
         context = {'info': info, 'done': True}
-        return render(request, 'google_sheet_rw.html', context)
+        response = render(request, 'google_sheet_rw.html', context)
+
+        return response
 
     else:
         # Если метод не POST, то направляем форму с выбором, что делать - загрузка/выгрузка данных

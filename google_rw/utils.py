@@ -1,7 +1,9 @@
-import gspread
+from django.http import HttpResponse
 from .google_auth import google_auth
 import time
 import json
+import gspread
+
 
 TEMP_PATH = 'temp_files/'
 
@@ -16,12 +18,10 @@ def import_values(url):
     sheet = result.get_worksheet(0)
     values = sheet.get_all_records()
 
-    name = str(time.time()).replace('.', '') + '.json'
+    response = HttpResponse(json.dumps(values, ensure_ascii=False), content_type='application/json')
+    response['Content-Disposition'] = 'attachment; filename="from_table.json"'
 
-    with open(TEMP_PATH + name, 'w') as f:
-        json.dump(values, f)
-
-    return f'Файл {name} сохранен в папке {TEMP_PATH}'
+    return response
 
 
 def export_values(url, json_values: dict):
